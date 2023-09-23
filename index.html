@@ -36,7 +36,9 @@
           message = "יש להקיש את הסכום באותיות עבריות";
         } else {
           let expected = amountToShekelsInHebrew(amountField.val());
-          let valid = expected === actual;
+          let expectedNormalized = normalizeShekelString(expected);
+          let actualNormalized = normalizeShekelString(actual);
+          let valid = expectedNormalized === actualNormalized;
           message = valid ? "" : expected.startsWith(actual) ? " " : `יש להקיש את הסכום כך: ${expected}`;
           if (!valid) {
             console.log([expected, actual]);

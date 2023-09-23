@@ -1,3 +1,28 @@
+function normalizeShekelString(string) {
+    // a few transformations that make strings match despite some unimportant variations:
+    // שנים עשר שקלים
+    // שתים עשרה שקל
+    // שניים-עשר שקלים חדשים
+    return (
+      string
+        .replace(/[^א-ת ]/g, "")
+        .replace(/(שקל חדש|שקלים חדשים|שקלים|שקל|שח|ש"ח|אגורה|אגורות)/g, "")
+        .replace(/ חדשים| חדש/g, "")
+        // male to female
+        .replace(/ה /g, " ")
+        .replace(/יי/g, "י")
+        .replace(/שתי/g, "שני")
+        .replace(/אחת/g, "אחד")
+        .replace(/חמש/g, "חמיש")
+        .replace(/שש/g, "שיש")
+        .replace(/מליון/g, "מיליון")
+        .replace(/מליארד|מילירד/g, "מיליארד")
+        .replace(/ו/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+    );
+}
+
 function amountToNumString(amount) {
   if (!amount) {
     return "";
@@ -241,6 +266,13 @@ function test(amount, expected) {
     //console.log(`test(${amount}, "${actual}")`);
   }
 }
+function normalizeTest(a, b) {
+  let normalizedA = normalizeShekelString(a);
+  let normalizedB = normalizeShekelString(b);
+  if (normalizedA !== normalizedB) {
+    console.log(`Failed test:\n${a} => ${normalizedA} != ${normalizedB} <= ${b}`);
+  }
+}
 function tests() {
   test(1, "שקל אחד");
   test(2, "שני שקלים");
@@ -393,5 +425,9 @@ function tests() {
   for (let i = 1; i < 1e12; i *= 102) {
     // test(i, i);
   }
+
+  normalizeTest("שתים עשרה שקל ושמונים אגורות", "שניים עשר שמונים");
+  normalizeTest("חמש מאות אלף, מאה ושלושים שקלים חדשים", "חמש מאות אלף מאה שלושים");
+  normalizeTest("שמונה מיליארד שלושים ושישה מיליון חמישים וארבעה אלף עשרים ושבעה שקלים", "שמונה מיליארד ושלושים וששה מליון וחמישים וארבע אלף ועשרים ושבע שקל");
 }
 //tests();
