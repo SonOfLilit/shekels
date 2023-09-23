@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Currency Formatter</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Interesting code starts here -->
     <script src="shekels.js"></script>
     <script>
       function handleAmountInput() {
@@ -51,6 +52,8 @@
         handleAmountInput();
       });
     </script>
+    <!-- To make a DIV unselectable, use the CSS attribute user-select: none; (see <div id="amountHE" ...>) -->
+    <!-- Interesting code end here, nothing to see beyond this line -->
     <link href="output.css" rel="stylesheet" />
   </head>
   <body>
@@ -78,7 +81,7 @@
             </p>
 
             <p class="mb-4">
-              לא ניתן להעתיק ולהדביק מהסכום המוצג בעברית.
+              כדי למנוע עקיפה של מנגנון הווידוא, לא ניתן להעתיק ולהדביק מהסכום המוצג בעברית.
             </p>
             <div id="amount-input" class="mb-4">
               <input
@@ -90,7 +93,6 @@
               />
             </div>
             <div id="amount-numeric" class="mb-4"></div>
-            <!-- To make a DIV unselectable, use the CSS attribute user-select: none; -->
             <div
               id="amountHE"
               class="mb-4 text-lg font-semibold bg-gray-200 p-4 rounded-lg"
