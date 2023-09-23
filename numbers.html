@@ -36,7 +36,7 @@
         } else {
           let expected = amountToShekelsInHebrew(amountField.val());
           let valid = expected === actual;
-          message = valid ? "" : `יש להקיש את הסכום כך: ${expected}`;
+          message = valid ? "" : expected.startsWith(actual) ? " " : `יש להקיש את הסכום כך: ${expected}`;
           if (!valid) {
             console.log([expected, actual]);
           }
