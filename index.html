@@ -20,6 +20,7 @@
             }).format(amount)
           );
           $("#amount-verify").toggle(amount >= 1000000.0);
+          $("#amount-numeric").toggleClass("text-red-500", amount >= 1000000000.0);
           $("#verificationInput").val("");
         } else {
           $("#amount-verify").hide();
@@ -77,13 +78,13 @@
             <h1 class="text-4xl mb-6 text-center font-semibold text-sky-500">
               ווידוא סכום בעברית
             </h1>
-            <p class="mb-4">
+            <p class="mb-4 hidden">
               הסכום המוזן יוצג בעברית, ואם הוא מעל מיליון ש"ח, המשתמש יידרש
               להקליד אותו לאישור • כדי למנוע עקיפת המנגון, לא ניתן להעתיק ולהדביק מהסכום המוצג •
               לנוחות המשתמש, סולחים על הבדלים מסוימים בהקלדה.
             </p>
 
-            <p class="mb-4 text-gray-300">
+            <p class="mb-4 text-gray-300 hidden">
               אם אתם מפתחי ווב ורוצים כזה באפליקציה שלכם, צפו בקוד של הדף הזה.
             </p>
             <div id="amount-input" class="mb-4">
